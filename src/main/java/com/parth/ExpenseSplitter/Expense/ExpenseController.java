@@ -22,7 +22,7 @@ import java.math.BigDecimal;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class ExpenseController {
     private final ExpenseRepo expenseRepo;
@@ -58,22 +58,13 @@ public class ExpenseController {
 
     }
     
-    @DeleteMapping("/groups/delete/{id}")
-    public String deleteById(@PathVariable Long id){
-        expenseRepo.deleteById(id);
-        return "Expense deleted successfully";
-       
-    }
-    @GetMapping("/groups")
-    public List<Expense> findAll(){
-        return expenseRepo.findAll();
+
+    @GetMapping("/groups/{groupId}/expenses")
+    public List<ExpenseResponse>  list(@PathVariable Long groupId){
+        return expenseRepo.findAllByExpenseGroup_Id(groupId).stream().map(this::toResponse).toList();
     }
     
-    @GetMapping("/groups/{id}")
-    public Expense findById(@PathVariable Long id){
-        return expenseRepo.findById(id).get();
-    }
-    
+
     private ExpenseResponse toResponse(@NonNull Expense expense){
             return new ExpenseResponse(expense.getId(),expense.getDescription(),expense.getAmount(),expense.getPaidBy().getName(),expense
                     .getParticipants().stream().map(user::getName).toList());

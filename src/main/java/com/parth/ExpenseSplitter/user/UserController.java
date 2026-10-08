@@ -23,31 +23,20 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<user> CreateUser(@Valid @RequestBody createUserReq req) {
+    public user CreateUser(@Valid @RequestBody createUserReq req) {
         if (userRepo.existsByEmail(req.email())){
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
         }
         user u = new user();
         u.setEmail(req.email());
         u.setName(req.name());
-        userRepo.save(u);
-        return ResponseEntity.ok(u);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<user> GetUser(@PathVariable("id") long id) {
-        user u = userRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-        return ResponseEntity.ok(u);
-    }
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> DeleteUser(@PathVariable long id) {
+        return userRepo.save(u);
 
-        user u = userRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-        userRepo.delete(u);
-        return ResponseEntity.ok("User deleted");
     }
+
     @GetMapping
-    public ResponseEntity<List<user>> findAll() {
-        return ResponseEntity.ok(userRepo.findAll());
+    public List<user> findAll() {
+        return userRepo.findAll();
     }
 
 }
