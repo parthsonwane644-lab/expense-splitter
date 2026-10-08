@@ -1,4 +1,4 @@
-package com.parth.ExpenseSplitter;
+package com.parth.ExpenseSplitter.user;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -34,12 +34,12 @@ public class UserController {
         return ResponseEntity.ok(u);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<user> GetUser(@PathVariable("id") Integer id) {
+    public ResponseEntity<user> GetUser(@PathVariable("id") long id) {
         user u = userRepo.findById(id).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         return ResponseEntity.ok(u);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> DeleteUser(@PathVariable Integer id) {
+    public ResponseEntity<String> DeleteUser(@PathVariable long id) {
 
         user u = userRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         userRepo.delete(u);

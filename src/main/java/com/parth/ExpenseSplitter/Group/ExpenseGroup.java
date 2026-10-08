@@ -1,5 +1,6 @@
-package com.parth.ExpenseSplitter;
+package com.parth.ExpenseSplitter.Group;
 
+import com.parth.ExpenseSplitter.user.user;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import java.util.*;
 @Getter @Setter
 public class ExpenseGroup {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String name;
 
     @ManyToMany

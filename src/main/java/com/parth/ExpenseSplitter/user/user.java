@@ -1,4 +1,4 @@
-package com.parth.ExpenseSplitter;
+package com.parth.ExpenseSplitter.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.Setter;
 
 public class user {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int  id;
+    private Long  id;
     private String name;
     @Column(unique = true)
     private String email;
