@@ -1,5 +1,6 @@
-package com.parth.ExpenseSplitter.user;
+package com.parth.ExpenseSplitter.Repo;
 
+import com.parth.ExpenseSplitter.model.user;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

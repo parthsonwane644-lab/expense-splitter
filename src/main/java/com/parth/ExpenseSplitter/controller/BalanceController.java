@@ -1,8 +1,8 @@
-package com.parth.ExpenseSplitter.Balance;
+package com.parth.ExpenseSplitter.controller;
 
-import com.parth.ExpenseSplitter.Expense.ExpenseRepo;
-import com.parth.ExpenseSplitter.Group.ExpenseGroup;
-import com.parth.ExpenseSplitter.Group.GroupRepo;
+import com.parth.ExpenseSplitter.service.BalanceService;
+import com.parth.ExpenseSplitter.model.ExpenseGroup;
+import com.parth.ExpenseSplitter.Repo.GroupRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

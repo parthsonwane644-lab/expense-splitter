@@ -1,7 +1,7 @@
 package com.parth.ExpenseSplitter;
 
 
-import com.parth.ExpenseSplitter.Expense.SplitUtil;
+import com.parth.ExpenseSplitter.model.SplitUtil;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.math.BigDecimal;

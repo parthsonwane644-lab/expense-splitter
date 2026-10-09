@@ -1,9 +1,9 @@
-package com.parth.ExpenseSplitter.Balance;
+package com.parth.ExpenseSplitter.service;
 
-import com.parth.ExpenseSplitter.Expense.Expense;
-import com.parth.ExpenseSplitter.Expense.ExpenseRepo;
-import com.parth.ExpenseSplitter.Expense.SplitUtil;
-import com.parth.ExpenseSplitter.user.user;
+import com.parth.ExpenseSplitter.model.Expense;
+import com.parth.ExpenseSplitter.Repo.ExpenseRepo;
+import com.parth.ExpenseSplitter.model.SplitUtil;
+import com.parth.ExpenseSplitter.model.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.*;

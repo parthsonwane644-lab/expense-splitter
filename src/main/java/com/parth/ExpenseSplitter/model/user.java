@@ -1,4 +1,4 @@
-package com.parth.ExpenseSplitter.user;
+package com.parth.ExpenseSplitter.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

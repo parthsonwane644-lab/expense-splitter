@@ -1,7 +1,5 @@
-package com.parth.ExpenseSplitter.Expense;
+package com.parth.ExpenseSplitter.model;
 
-import com.parth.ExpenseSplitter.Group.ExpenseGroup;
-import com.parth.ExpenseSplitter.user.user;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

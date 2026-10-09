@@ -1,7 +1,9 @@
-package com.parth.ExpenseSplitter.Group;
+package com.parth.ExpenseSplitter.controller;
 
-import com.parth.ExpenseSplitter.user.UserRepo;
-import com.parth.ExpenseSplitter.user.user;
+import com.parth.ExpenseSplitter.Repo.GroupRepo;
+import com.parth.ExpenseSplitter.Repo.UserRepo;
+import com.parth.ExpenseSplitter.model.ExpenseGroup;
+import com.parth.ExpenseSplitter.model.user;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -10,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

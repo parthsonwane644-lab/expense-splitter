@@ -1,4 +1,4 @@
-package com.parth.ExpenseSplitter.Expense;
+package com.parth.ExpenseSplitter.model;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;

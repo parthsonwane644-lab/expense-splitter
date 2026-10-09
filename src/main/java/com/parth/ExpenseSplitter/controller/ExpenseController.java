@@ -1,9 +1,11 @@
-package com.parth.ExpenseSplitter.Expense;
+package com.parth.ExpenseSplitter.controller;
 
-import com.parth.ExpenseSplitter.Group.ExpenseGroup;
-import com.parth.ExpenseSplitter.Group.GroupRepo;
-import com.parth.ExpenseSplitter.user.UserRepo;
-import com.parth.ExpenseSplitter.user.user;
+import com.parth.ExpenseSplitter.model.Expense;
+import com.parth.ExpenseSplitter.model.ExpenseGroup;
+import com.parth.ExpenseSplitter.Repo.ExpenseRepo;
+import com.parth.ExpenseSplitter.Repo.GroupRepo;
+import com.parth.ExpenseSplitter.Repo.UserRepo;
+import com.parth.ExpenseSplitter.model.user;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
