@@ -3,6 +3,7 @@ package com.parth.ExpenseSplitter.controller;
 import com.parth.ExpenseSplitter.service.BalanceService;
 import com.parth.ExpenseSplitter.model.ExpenseGroup;
 import com.parth.ExpenseSplitter.Repo.GroupRepo;
+import com.parth.ExpenseSplitter.service.simplifyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 @RequestMapping("api/groups/{groupId}")
 @RequiredArgsConstructor
 public class BalanceController {
+    private final simplifyService s;
     private final BalanceService balanceService;
     private final GroupRepo groupRepo;
 
@@ -30,6 +32,12 @@ public class BalanceController {
         return g.getMembers().stream()
                 .map(u->new BalanceDto(u.getId(),u.getName(),net.getOrDefault(u.getId(),BigDecimal.ZERO)))
                 .toList();
+    }
+
+    @GetMapping("/settle-plan")
+    List<simplifyService.transfer> settlePlan(@PathVariable Long groupId){
+        groupRepo.findById(groupId).orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"group not found"));
+        return s.simplify(balanceService.netBalances(groupId));
     }
 
 
