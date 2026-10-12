@@ -20,21 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 public class UserController {
     private final UserRepo userRepo;
 
-    public record createUserReq(@NotBlank String name, @Email String email) {
-    }
-
-    @PostMapping
-    public user CreateUser(@Valid @RequestBody createUserReq req) {
-        if (userRepo.existsByEmail(req.email())){
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Email already exists");
-        }
-        user u = new user();
-        u.setEmail(req.email());
-        u.setName(req.name());
-        return userRepo.save(u);
-
-    }
-
     @GetMapping
     public List<user> findAll() {
         return userRepo.findAll();

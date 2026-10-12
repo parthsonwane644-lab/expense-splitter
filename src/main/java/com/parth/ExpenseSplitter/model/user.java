@@ -16,5 +16,6 @@ public class user {
     private String name;
     @Column(unique = true)
     private String email;
+    private String password;
 
 }
