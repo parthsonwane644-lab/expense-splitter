@@ -16,6 +16,7 @@ public class ExpenseGroup {
 
     @ManyToMany
     private List<user> members=new ArrayList<>();
-
+    @ManyToOne
+    private user createdBy;
 }
 
