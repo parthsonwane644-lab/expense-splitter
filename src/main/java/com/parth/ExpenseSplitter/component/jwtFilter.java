@@ -30,7 +30,8 @@ public class jwtFilter extends OncePerRequestFilter {
             catch (Exception e) {
                 // user stay not logged in
             }
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
+
     }
 }
