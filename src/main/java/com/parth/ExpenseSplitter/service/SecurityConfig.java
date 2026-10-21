@@ -1,5 +1,4 @@
 package com.parth.ExpenseSplitter.service;
-
 import com.parth.ExpenseSplitter.component.jwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +21,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(a -> a.requestMatchers("/api/auth/**", "/h2-console/**").permitAll()
+                .authorizeHttpRequests(a -> a.requestMatchers("/swagger-ui/**","/api/auth/**", "/h2-console/**","/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated())
                 .headers(h -> h.frameOptions(f -> f.sameOrigin())) // so that h2 console works
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
