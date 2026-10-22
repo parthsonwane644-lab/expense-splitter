@@ -100,6 +100,11 @@ public class GroupController {
         expenseRepo.deleteAll(expenseRepo.findAllByExpenseGroup_Id(groupId));
         groupRepo.delete(g);
     }
+    @GetMapping
+    public List<GroupResponse> mine() {
+        Long me=currentUser.get().getId();
+        return groupRepo.findByMembersId(me).stream().map(this::toResponse).toList();
+    }
 
     @DeleteMapping("/{groupId}/members/{userId}")
     @Transactional
