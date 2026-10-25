@@ -22,6 +22,7 @@ public class AiController {
     }
     @PostMapping("/groups/{groupId}/parse-expense")
     public ParsedExpense parse(@PathVariable Long groupId, @Valid @RequestBody TextRequest req){
+
         ExpenseGroup g=groupController.getGroupForMember(groupId);
         List<String> names=g.getMembers().stream().map(user::getName).toList();
         return expenseAiService.parse(req.text(),names,currentUser.get().getName());

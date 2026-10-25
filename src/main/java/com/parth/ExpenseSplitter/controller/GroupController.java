@@ -72,10 +72,14 @@ public class GroupController {
 
     @GetMapping("/{groupId}")
     public GroupResponse findById(@PathVariable("groupId") long groupId) {
+
         ExpenseGroup group = groupRepo.findById(groupId)
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "Group not found"));
-
+        Long me =currentUser.get().getId();
+        if(group.getMembers().stream().noneMatch(member -> member.getId().equals(me))) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, " you are not in the group");
+        }
         return toResponse(group);
     }
     public ExpenseGroup getGroupForMember(Long groupId) {

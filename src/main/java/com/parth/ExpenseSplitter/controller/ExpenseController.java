@@ -1,5 +1,6 @@
 package com.parth.ExpenseSplitter.controller;
 
+import com.parth.ExpenseSplitter.component.CurrentUser;
 import com.parth.ExpenseSplitter.model.Expense;
 import com.parth.ExpenseSplitter.model.ExpenseGroup;
 import com.parth.ExpenseSplitter.Repo.ExpenseRepo;
@@ -30,6 +31,7 @@ public class ExpenseController {
     private final ExpenseRepo expenseRepo;
     private final GroupRepo groupRepo;
     private final UserRepo userRepo;
+    private final CurrentUser currentUser;
 
     public record createExpenseRequest(
             @NotNull @Positive BigDecimal amount,
@@ -43,6 +45,11 @@ public class ExpenseController {
     @PostMapping("/groups/{groupId}/expenses")
     public ExpenseResponse add(@PathVariable Long groupId , @Valid @RequestBody createExpenseRequest req){
         ExpenseGroup group=groupRepo.findById(groupId).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Group not found"));
+        Long me=currentUser.get().getId();
+        Long creator=group.getCreatedBy().getId();
+        if(!me.equals(creator)){
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,"You are not allowed to create a new settlement");
+        }
         Set<Long>memberIds=group.getMembers().stream().map(user::getId).collect(Collectors.toSet());
         if(!memberIds.contains(req.PaidByid()) || !memberIds.containsAll(req.ParticipantsIds())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Members not found");
@@ -63,6 +70,11 @@ public class ExpenseController {
 
     @GetMapping("/groups/{groupId}/expenses")
     public List<ExpenseResponse>  list(@PathVariable Long groupId){
+        Long  me=currentUser.get().getId();
+        ExpenseGroup group=groupRepo.findById(groupId).orElseThrow(()-> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Group not found"));
+        if(group.getMembers().stream().noneMatch(u->u.getId().equals(me))){
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,"you are not a group member");
+        }
         return expenseRepo.findAllByExpenseGroup_Id(groupId).stream().map(this::toResponse).toList();
     }
     
